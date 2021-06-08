@@ -35,6 +35,17 @@ function getIntentUrl(): string {
   return `https://twitter.com/intent/tweet?${usp}`
 }
 
+function calcPerpendicular(halfDistance) {
+  const minimum = 1 // [m]
+  const diagonal = 1.5 // [m]
+
+  const squareDiff = diagonal ** 2 - halfDistance ** 2
+
+  return squareDiff < 0
+    ? minimum
+    : Math.max(minimum, Math.round(100 * Math.sqrt(squareDiff)) / 100)
+}
+
 export default function () {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [context, setContext] = useState<CanvasRenderingContext2D>(null)
@@ -94,15 +105,12 @@ export default function () {
     const halfDistance = isNaN(Number(distanceMeter))
       ? 0.5
       : Number(distanceMeter) / 2
-    const diagonal =
-      halfDistance ** 2 > 1.5 ** 2
-        ? 0
-        : Math.round(100 * Math.sqrt(1.5 ** 2 - halfDistance ** 2)) / 100
+    const perpendicular = calcPerpendicular(halfDistance)
 
     theContext.font = "12px Robot"
     theContext.fillText(`${distanceMeter}m`, 115, 40)
     theContext.fillText("1.5m", 50, 130)
-    theContext.fillText(`${diagonal}m`, 130, 130)
+    theContext.fillText(`${perpendicular}m`, 130, 130)
   })
 
   return (
