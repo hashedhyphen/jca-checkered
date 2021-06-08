@@ -30,8 +30,8 @@ const Paragraph = styled.p`
 
 function getIntentUrl(): string {
   const usp = new URLSearchParams()
-  usp.set("url", encodeURIComponent("https://jca-checkered.vercel.app/"))
-  usp.set("hashtags", encodeURIComponent(title))
+  usp.set("url", "https://jca-checkered.vercel.app/")
+  usp.set("hashtags", title)
   return `https://twitter.com/intent/tweet?${usp}`
 }
 
