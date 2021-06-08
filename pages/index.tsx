@@ -135,7 +135,7 @@ export default function () {
         <Paragraph>
           PR：
           <Link href="https://music.羽川翼.com/">
-            浪白公園音樂團は合唱奏者を募集しています。
+            浪白公園音樂團は合唱奏者を募集します。
           </Link>
         </Paragraph>
 
