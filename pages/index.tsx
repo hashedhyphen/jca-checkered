@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 import Layout from "../components/Layout"
 
-const title = "市松模様で歌うときのマスク無し距離を計算するやつ"
+const title = "市松模様で歌うときのマスク無し距離を計算するだけのやつ"
 
 const Main = styled.main`
   padding: 0.5rem;
@@ -27,6 +27,13 @@ const Paragraph = styled.p`
   padding-bottom: 1rem;
   font-size: 0.9rem;
 `
+
+function getIntentUrl(): string {
+  const usp = new URLSearchParams()
+  usp.set("url", encodeURIComponent(location.href))
+  usp.set("hashtags", encodeURIComponent(title))
+  return `https://twitter.com/intent/tweet?${usp}`
+}
 
 export default function () {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -133,7 +140,7 @@ export default function () {
         </Paragraph>
 
         <TweetButtonWrapper>
-          <Link href="https://twitter.com/intent/tweet?text=test">
+          <Link href={getIntentUrl()}>
             <Button variant="contained" color="primary">
               ツイートする
             </Button>
