@@ -6,7 +6,7 @@ import Layout from "../components/Layout"
 
 const title = "市松模様で歌うときのマスク無し距離を計算するやつ"
 
-const Header = styled.header`
+const Main = styled.main`
   padding: 0.5rem;
 `
 
@@ -16,17 +16,16 @@ const CanvasWrapper = styled.div`
 
 const FormWrapper = styled.div`
   width: 170px;
-  padding-left: 70px;
+  padding: 1rem 0 0 70px;
 `
 
 const TweetButtonWrapper = styled.div`
   text-align: center;
 `
 
-const Advertisement = styled.p`
-  padding: 0 1rem 1rem 1rem;
+const Paragraph = styled.p`
+  padding-bottom: 1rem;
   font-size: 0.9rem;
-  text-align: center;
 `
 
 export default function () {
@@ -91,7 +90,7 @@ export default function () {
     const diagonal =
       halfDistance ** 2 > 1.5 ** 2
         ? 0
-        : Math.round(10 * Math.sqrt(1.5 ** 2 - halfDistance ** 2)) / 10
+        : Math.round(100 * Math.sqrt(1.5 ** 2 - halfDistance ** 2)) / 100
 
     theContext.font = "12px Robot"
     theContext.fillText(`${distanceMeter}m`, 115, 40)
@@ -101,38 +100,46 @@ export default function () {
 
   return (
     <Layout title={title}>
-      <Header>
+      <Main>
         <Typography component="h1" variant="h4">
           #{title}
         </Typography>
-      </Header>
 
-      <FormWrapper>
-        <TextField
-          label="横の距離[m]"
-          value={distanceMeter}
-          onChange={(evt) => setDistanceMeter(evt.currentTarget.value)}
-        ></TextField>
-      </FormWrapper>
+        <FormWrapper>
+          <TextField
+            label="横の距離[m]"
+            value={distanceMeter}
+            onChange={(evt) => setDistanceMeter(evt.currentTarget.value)}
+          ></TextField>
+        </FormWrapper>
 
-      <CanvasWrapper>
-        <canvas ref={canvasRef} width="250" height="250" />
-      </CanvasWrapper>
+        <CanvasWrapper>
+          <canvas ref={canvasRef} width="250" height="250" />
+        </CanvasWrapper>
 
-      <Advertisement>
-        PR：
-        <Link href="https://music.羽川翼.com/">
-          浪白公園音樂團は合唱奏者を募集しています。
-        </Link>
-      </Advertisement>
+        <Paragraph>
+          参考：
+          <Link href="https://jcanet.or.jp/news/COVID-19.htm">
+            合唱活動における新型コロナウイルス感染症拡大防止のガイドライン 第 3
+            版
+          </Link>
+        </Paragraph>
 
-      <TweetButtonWrapper>
-        <Link href="https://twitter.com/intent/tweet?text=test">
-          <Button variant="contained" color="primary">
-            ツイートする
-          </Button>
-        </Link>
-      </TweetButtonWrapper>
+        <Paragraph>
+          PR：
+          <Link href="https://music.羽川翼.com/">
+            浪白公園音樂團は合唱奏者を募集しています。
+          </Link>
+        </Paragraph>
+
+        <TweetButtonWrapper>
+          <Link href="https://twitter.com/intent/tweet?text=test">
+            <Button variant="contained" color="primary">
+              ツイートする
+            </Button>
+          </Link>
+        </TweetButtonWrapper>
+      </Main>
     </Layout>
   )
 }
